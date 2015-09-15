@@ -1,6 +1,6 @@
 {
   "name": "fs-signin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Manage FamilySearch authentication state",
   "homepage": "https://github.com/york-solutions/fs-signin",
   "main": "fs-signin.html",
@@ -19,6 +19,10 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.0.0",
-    "fs-client": "york-solutions/fs-client#~0.1.5"
+    "fs-client": "york-solutions/fs-client#~0.1.5",
+    "fs-components-behavior": "york-solutions/fs-components-behavior#~0.1.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0"
   }
 }

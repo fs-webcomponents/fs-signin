@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../fs-client/fs-client.html">
+<link rel="import" href="../fs-components-behavior/fs-components-behavior.html">
 
 <dom-module id="fs-signin">
   <template>
@@ -71,14 +72,7 @@
      * @event error
      */
     
-    properties: {
-      
-      /**
-       * Optional name of the sdk client to use.
-       */
-      clientName: String
-      
-    },
+    behaviors: [FSBehavior],
     
     signin: function(){
       var self = this;
