@@ -1,2 +1,3 @@
-# fs-signin-aware
+# fs-signin
+
 Manage FamilySearch authentication state
