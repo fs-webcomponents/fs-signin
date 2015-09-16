@@ -1,6 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../fs-client/fs-client.html">
-<link rel="import" href="../fs-components-behavior/fs-components-behavior.html">
+<link rel="import" href="../fs-behavior/fs-behavior.html">
 
 <dom-module id="fs-signin">
   <template>
@@ -76,7 +76,7 @@
     
     signin: function(){
       var self = this;
-      this.$.client.client.getAccessToken().then(function(token){
+      this.getClient().getAccessToken().then(function(token){
         self.fire('signin', token);
       }, function(e){
         self.fire('error', e);
