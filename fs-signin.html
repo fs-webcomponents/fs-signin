@@ -3,53 +3,15 @@
 <link rel="import" href="../fs-behavior/fs-behavior.html">
 
 <dom-module id="fs-signin">
+  <link rel="import" type="css" href="fs-signin.css">
   <template>
-    <style>
-      .fs-button {
-        -webkit-appearance: none;
-        -webkit-touch-callout: none;
-        background-color: #f5f4f1;
-        border-radius: 4px;
-        border: 1px solid #beb8a7;
-        color: #333331;
-        cursor: pointer;
-        display: inline-block;
-        font-size: 16px;
-        font-size: 1rem;
-        font-weight: 400;
-        line-height: 1;
-        padding: 8.5px 20px;
-        padding: .531rem 1.25rem;
-        position: relative;
-        text-decoration: none;
-        transition: padding .2s;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        vertical-align: middle;
-        white-space: nowrap;
-      }
-      
-      .fs-button:hover {
-        background: #fbfaf9;
-        color: #333331;
-        text-decoration: none;
-      }
-      
-      .fs-button--recommended {
-        background-color: #3073dd;
-        border: 1px solid #246bdb;
-        color: #fff;
-      }
-      
-      .fs-button--recommended:hover {
-        background: #3882f8;
-        color: #fff;
-      }
-    </style>
-    <fs-client id="client" name="{{clientName}}"></fs-client>
-    <button id="button" class="fs-button fs-button--recommended" on-click="signin">Sign In</button>
+    <fs-client id="client" name="{{clientName}}" on-authenticated-changed="_authenticatedChanged"></fs-client>
+    <template is="dom-if" if="{{_isUnauthenticated(signedIn)}}">
+      <button id="signin" class="fs-button fs-button--recommended" on-click="_signIn">Sign In</button>
+    </template>
+    <template is="dom-if" if="{{_isAuthenticated(signedIn)}}">
+      <button id="signout" class="fs-button fs-button--recommended" on-click="_signOut">Sign Out</button>
+    </template>
   </template>
 </dom-module>
 <script>
@@ -60,27 +22,43 @@
     
     is: 'fs-signin',
     
-    /**
-     * Fired when the user signs in.
-     * 
-     * @event signin
-     */
-     
-    /**
-     * Fired when sign in has an error.
-     *
-     * @event error
-     */
-    
     behaviors: [FSBehavior],
     
-    signin: function(){
-      var self = this;
-      this.getClient().getAccessToken().then(function(token){
-        self.fire('signin', token);
-      }, function(e){
-        self.fire('error', e);
-      });
+    properties: {
+      
+      signedIn: {
+        type: Boolean,
+        notify: true,
+        value: false
+      }
+      
+    },
+    
+    /**
+     * Check authenticated state of client and update display accordingly
+     */
+    ready: function(){
+      this.signedIn = this.isAuthenticated();
+    },
+    
+    _signIn: function(){
+      this.$.client.signIn();
+    },
+    
+    _signOut: function(){
+      this.$.client.signOut();
+    },
+    
+    _authenticatedChanged: function(e){
+      this.signedIn = e.detail.value;
+    },
+    
+    _isAuthenticated: function(signedIn){
+      return signedIn;
+    },
+    
+    _isUnauthenticated: function(signedIn){
+      return !signedIn;
     }
     
   });

@@ -1,0 +1,49 @@
+.fs-button {
+  -webkit-appearance: none;
+  -webkit-touch-callout: none;
+  background-color: #f5f4f1;
+  border-radius: 4px;
+  border: 1px solid #beb8a7;
+  color: #333331;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+  padding: 8.5px 20px;
+  padding: .531rem 1.25rem;
+  position: relative;
+  text-decoration: none;
+  transition: padding .2s;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.fs-button:hover {
+  background: #fbfaf9;
+  color: #333331;
+  text-decoration: none;
+}
+
+.fs-button--recommended {
+  background-color: #3073dd;
+  border: 1px solid #246bdb;
+  color: #fff;
+}
+
+.fs-button--recommended:hover {
+  background: #3882f8;
+  color: #fff;
+}
+
+.fs-button:disabled {
+  cursor: not-allowed;
+  background-color: #f5f4f1;
+  border: 1px solid #cbc6b9;
+  color: rgba(51,51,49,.3);
+}
