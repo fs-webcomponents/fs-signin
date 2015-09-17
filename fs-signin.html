@@ -17,12 +17,7 @@ Example:
   <link rel="import" type="css" href="fs-signin.css">
   <template>
     <fs-client id="client" name="{{clientName}}" on-authenticated-changed="_authenticatedChanged"></fs-client>
-    <template is="dom-if" if="{{_isUnauthenticated(signedIn)}}">
-      <button id="signin" class="fs-button fs-button--recommended" on-click="_signIn">Sign In</button>
-    </template>
-    <template is="dom-if" if="{{_isAuthenticated(signedIn)}}">
-      <button id="signout" class="fs-button fs-button--recommended" on-click="_signOut">Sign Out</button>
-    </template>
+    <button id="button" class="fs-button fs-button--recommended" on-click="_clickAction">Sign In</button>
   </template>
 </dom-module>
 <script>
@@ -50,24 +45,21 @@ Example:
       this.signedIn = this.isAuthenticated();
     },
     
-    _signIn: function(){
-      this.$.client.signIn();
-    },
-    
-    _signOut: function(){
-      this.$.client.signOut();
+    _clickAction: function(){
+      if(this.signedIn){
+        this.$.client.signOut();
+      } else {
+        this.$.client.signIn();
+      }
     },
     
     _authenticatedChanged: function(e){
       this.signedIn = e.detail.value;
-    },
-    
-    _isAuthenticated: function(signedIn){
-      return signedIn;
-    },
-    
-    _isUnauthenticated: function(signedIn){
-      return !signedIn;
+      if(this.signedIn){
+        this.$.button.textContent = 'Sign Out';
+      } else {
+        this.$.button.textContent = 'Sign In';
+      }
     }
     
   });
