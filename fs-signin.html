@@ -1,6 +1,8 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../fs-client/fs-client.html">
 <link rel="import" href="../fs-behavior/fs-behavior.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-styles/color.html">
 
 <!--
 A FamilySearch sign in button.
@@ -17,7 +19,7 @@ Example:
   <link rel="import" type="css" href="fs-signin.css">
   <template>
     <fs-client id="client" name="{{clientName}}" on-authenticated-changed="_authenticatedChanged"></fs-client>
-    <button id="button" class="fs-button fs-button--recommended" on-click="_clickAction">Sign In</button>
+    <paper-button id="button" class$="{{_computeClass(signedIn)}}" on-click="_clickAction">{{_computeText(signedIn)}}</paper-button>
   </template>
 </dom-module>
 <script>
@@ -37,13 +39,10 @@ Example:
       }
       
     },
-    
-    /**
-     * Check authenticated state of client and update display accordingly
-     */
+
     ready: function(){
       this.signedIn = this.isAuthenticated();
-    },
+    }, 
     
     _clickAction: function(){
       if(this.signedIn){
@@ -55,11 +54,14 @@ Example:
     
     _authenticatedChanged: function(e){
       this.signedIn = e.detail.value;
-      if(this.signedIn){
-        this.$.button.textContent = 'Sign Out';
-      } else {
-        this.$.button.textContent = 'Sign In';
-      }
+    },
+    
+    _computeText: function(signedIn){
+      return signedIn ? 'Sign Out' : 'Sign In';
+    },
+    
+    _computeClass: function(signedIn){
+      return signedIn ? '' : 'recommended';
     }
     
   });
