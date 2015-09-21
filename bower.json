@@ -1,6 +1,6 @@
 {
   "name": "fs-signin",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Manage FamilySearch authentication state",
   "homepage": "https://github.com/york-solutions/fs-signin",
   "main": "fs-signin.html",
