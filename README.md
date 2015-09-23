@@ -1,3 +1,3 @@
 # fs-signin
 
-Manage FamilySearch authentication state
+Polymer element that manages FamilySearch authentication state
