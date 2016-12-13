@@ -1,6 +1,6 @@
 {
   "name": "fs-signin",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Polymer element that manages FamilySearch authentication state",
   "homepage": "https://github.com/fs-webcomponents/fs-signin",
   "main": "fs-signin.html",
