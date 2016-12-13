@@ -11,6 +11,15 @@ Example:
 
     <fs-signin></fs-signin>
 
+### Styling
+
+The following custom properties are available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--fs-signin-signout` | Mixin applied when the button is in the signed out state | {}
+`--fs-signin-signin` | Mixin applied when the button is in the signed in state | {}
+
 @group FamilySearch Elements
 @element fs-signin
 @demo demo/index.html
@@ -25,11 +34,13 @@ Example:
       paper-button {
         background-color: var(--paper-grey-200);
         color: #333;
+        @apply(--fs-signin-signout);
       }
       
       paper-button.recommended {
         background-color: var(--paper-blue-500);
         color: #fff;
+        @apply(--fs-signin-signin);
       }
     </style>
     <fs-client id="client" name="{{clientName}}" on-authenticated-changed="_authenticatedChanged"></fs-client>
