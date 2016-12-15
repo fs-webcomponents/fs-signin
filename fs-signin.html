@@ -46,48 +46,50 @@ Custom property | Description | Default
     <fs-client id="client" name="{{clientName}}" on-authenticated-changed="_authenticatedChanged"></fs-client>
     <paper-button id="button" class$="{{_computeClass(signedIn)}}" on-click="_clickAction">{{_computeText(signedIn)}}</paper-button>
   </template>
+  
+  <script>
+  
+    Polymer({
+      
+      is: 'fs-signin',
+      
+      behaviors: [FSBehavior],
+      
+      properties: {
+        
+        signedIn: {
+          type: Boolean,
+          notify: true,
+          value: false
+        }
+        
+      },
+  
+      ready: function(){
+        this.signedIn = this.isAuthenticated();
+      }, 
+      
+      _clickAction: function(){
+        if(this.signedIn){
+          this.$.client.signOut();
+        } else {
+          this.$.client.signIn();
+        }
+      },
+      
+      _authenticatedChanged: function(e){
+        this.signedIn = e.detail.value;
+      },
+      
+      _computeText: function(signedIn){
+        return signedIn ? 'Sign Out' : 'Sign In';
+      },
+      
+      _computeClass: function(signedIn){
+        return signedIn ? '' : 'recommended';
+      }
+      
+    });
+  </script>
+  
 </dom-module>
-<script>
-
-  Polymer({
-    
-    is: 'fs-signin',
-    
-    behaviors: [FSBehavior],
-    
-    properties: {
-      
-      signedIn: {
-        type: Boolean,
-        notify: true,
-        value: false
-      }
-      
-    },
-
-    ready: function(){
-      this.signedIn = this.isAuthenticated();
-    }, 
-    
-    _clickAction: function(){
-      if(this.signedIn){
-        this.$.client.signOut();
-      } else {
-        this.$.client.signIn();
-      }
-    },
-    
-    _authenticatedChanged: function(e){
-      this.signedIn = e.detail.value;
-    },
-    
-    _computeText: function(signedIn){
-      return signedIn ? 'Sign Out' : 'Sign In';
-    },
-    
-    _computeClass: function(signedIn){
-      return signedIn ? '' : 'recommended';
-    }
-    
-  });
-</script>
