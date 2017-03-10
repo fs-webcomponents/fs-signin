@@ -18,13 +18,13 @@
     "familysearch"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.0.0",
-    "fs-client": "fs-webcomponents/fs-client#^2.0.0",
-    "fs-behavior": "fs-webcomponents/fs-behavior#^2.0.0",
-    "paper-button": "PolymerElements/paper-button#^1.0.14",
-    "paper-styles": "PolymerElements/paper-styles#^1.1.5"
+    "polymer": "Polymer/polymer#^2.0.0",
+    "fs-client": "fs-webcomponents/fs-client#polymer-2",
+    "fs-behavior": "fs-webcomponents/fs-behavior#polymer-2",
+    "paper-button": "PolymerElements/paper-button#2.0-preview",
+    "paper-styles": "PolymerElements/paper-styles#2.0-preview"
   },
   "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#^1.1.7"
+    "iron-component-page": "PolymerElements/iron-component-page#2.0-preview"
   }
 }
