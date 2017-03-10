@@ -8,16 +8,18 @@
     <link rel="import" href="../fs-signin.html">
   </head>
   <body unresolved>
-    <style is="custom-style">
-      fs-signin.mixins {
-        --fs-signin-signin: {
-          background-color: var(--google-red-500);
+    <custom-style>
+      <style is="custom-style">
+        fs-signin.mixins {
+          --fs-signin-signin: {
+            background-color: var(--google-red-500);
+          }
+          --fs-signin-signout: {
+            background-color: var(--paper-yellow-200);
+          }
         }
-        --fs-signin-signout: {
-          background-color: var(--paper-yellow-200);
-        }
-      }
-    </style>
+      </style>
+    </custom-style>
 
     <fs-client app-key="a02j00000099Mc2AAE" redirect-uri="." environment="sandbox" save-access-token exchange-code redirect-after-sign-in="."></fs-client>
     
