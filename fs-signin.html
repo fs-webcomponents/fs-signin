@@ -1,6 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../fs-client/fs-client.html">
-<link rel="import" href="../fs-behavior/fs-behavior.html">
+<link rel="import" href="../fs-api-aware/fs-api-aware.html">
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../paper-styles/color.html">
 
@@ -21,7 +21,8 @@ Custom property | Description | Default
 `--fs-signin-signin` | Mixin applied when the button is in the signed in state | {}
 
 @group FamilySearch Elements
-@element fs-signin
+@customElement
+@polymer
 @demo demo/index.html
 -->
 <dom-module id="fs-signin">
@@ -43,51 +44,43 @@ Custom property | Description | Default
         @apply --fs-signin-signin;
       }
     </style>
-    <fs-client id="client" name="{{clientName}}" on-authenticated-changed="_authenticatedChanged"></fs-client>
+    <fs-client id="client" name="{{clientName}}" authenticated="{{signedIn}}"></fs-client>
     <paper-button id="button" class$="{{_computeClass(signedIn)}}" on-click="_clickAction">{{_computeText(signedIn)}}</paper-button>
   </template>
-</dom-module>
-<script>
-
-  Polymer({
-    
-    is: 'fs-signin',
-    
-    behaviors: [FSBehavior],
-    
-    properties: {
+  <script>
+  
+    class FSSignin extends FSApiAwareMixin(Polymer.Element) {
       
-      signedIn: {
-        type: Boolean,
-        notify: true,
-        value: false
+      static get is() { return 'fs-signin'; }
+      
+      static get properties()  {
+        return {
+          signedIn: {
+            type: Boolean,
+            notify: true,
+            value: false
+          }
+        };
+      }
+  
+      _clickAction() {
+        if(this.signedIn){
+          this.$.client.signOut();
+        } else {
+          this.$.client.signIn();
+        }
       }
       
-    },
-
-    ready: function(){
-      this.signedIn = this.isAuthenticated();
-    }, 
-    
-    _clickAction: function(){
-      if(this.signedIn){
-        this.$.client.signOut();
-      } else {
-        this.$.client.signIn();
+      _computeText(signedIn) {
+        return signedIn ? 'Sign Out' : 'Sign In';
       }
-    },
-    
-    _authenticatedChanged: function(e){
-      this.signedIn = e.detail.value;
-    },
-    
-    _computeText: function(signedIn){
-      return signedIn ? 'Sign Out' : 'Sign In';
-    },
-    
-    _computeClass: function(signedIn){
-      return signedIn ? '' : 'recommended';
+      
+      _computeClass(signedIn) {
+        return signedIn ? '' : 'recommended';
+      }
+      
     }
     
-  });
-</script>
+    customElements.define(FSSignin.is, FSSignin);
+  </script>
+</dom-module>
